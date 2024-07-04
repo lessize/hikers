@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::link},        <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <title>로그인</title>
+  <link rel="stylesheet" th:href="@{/css/member/login.css}">
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <h3>로그인</h3>
+        <form th:action="@{/members/login}" method="post" th:object="${loginForm}">
+          <p><input type="text" th:field="*{id}" placeholder="아이디"></p>
+          <p><input type="password" th:field="*{pw}" placeholder="비밀번호"></p>
+          <p>
+            <button type="submit">로그인</button>
+          </p>
+          <p>
+            아이디나 비밀번호를 잊어버리셨나요?
+          </p>
+          <ul class="find_idpw">
+            <li><a href="/members/findId">아이디 찾기</a></li>
+            <li><a href="/members/findPwd">비밀번호 찾기</a></li>
+          </ul>
+        </form>
+      </main>
+    </div>
+  </div>
+  <script th:src="@{/js/member/login.js}"></script>
+</body>
+</html>

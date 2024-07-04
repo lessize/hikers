@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{::link},              <!--/* styles */-->
+      ~{::script},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>산 검색 결과</title>
+  <link rel="stylesheet" th:href="@{/css/service/search_mountain_detail.css}">
+  <script defer th:src="@{/js/service/search_mountain_detail.js}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA616oTuN5iF-TJaBxAxT_QxkCqm1PurU0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
+  <script src="https://kit.fontawesome.com/4831c8d451.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::global"/>
+  <div id="content" >
+    <main>
+      <div class="search-title">
+        <h1 th:if="${searchType == '선택한 지역'}">선택한 지역: <span th:text="${selectedCity}">[여기에 선택한 지역 이름 입력]</span></h1>
+        <h1 th:if="${searchType == '검색 결과'}"><span th:text="${searchText}">[여기에 검색어 입력]</span> 검색 결과</h1>
+        <h1 th:if="${searchType == '산 코드 검색 결과'}"><span th:each="mountain : ${mountains}" th:text="${mountain.mntnNm + '(' + mountain.city + ')'}"></span></h1>
+      </div>
+      <div class="wrap-main">
+        <div class="cont">
+          <div class="column">
+            <ul th:if="${mountains.empty}">
+              <li>검색 결과 없음</li>
+            </ul>
+            <ul th:if="${not mountains.empty}">
+              <li th:each="mountain : ${mountains}"
+                  th:text="${mountain.mntnNm}"
+                  th:attr="data-mountain-code=${mountain.mntnCode}"
+                  class="mountain-item"
+                  onclick="fetchBbs(this)">
+              </li>
+            </ul>
+          </div>
+          <div style="display: flex; justify-content: center;" id="review-button">
+            <i class="fa-solid fa-chevron-up"></i>
+          </div>
+          <div>
+            <ul id="bbsList" class="bbs-list"></ul> <!-- BBS 리스트를 표시할 영역 -->
+          </div>
+        </div>
+        <div id="map"></div>
+      </div>
+      <div class="weather-wrap" style="display: none;">
+        <div>날씨 정보</div>
+        <div class="weather">
+        </div>
+      </div>
+      <div class="fire-wrap" style="display: none;">
+        <div>산불 정보</div>
+        <div class="fire">
+          <div class="fire-alert"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

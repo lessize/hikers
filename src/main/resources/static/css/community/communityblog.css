@@ -1,0 +1,209 @@
+/* 라인 정비 */
+/* *{outline: 1px solid red;} */
+
+/* 전체 정렬 */
+.main_body{
+  margin: 0 0 0 0;
+  padding: 0;
+}
+/* 폰트 */
+.title_font{
+  font-size: 3.5vh;
+  font-weight: 700;
+}
+
+.community_main_font{
+    font-size:2.7vh;
+    font-weight: 700;
+    padding-bottom: 30px;
+
+}
+
+.in_button {
+font-size: 100%;
+  border: none;
+  font-weight: normal;
+  color: black;
+  background-color: white;
+  transition: all 0.3s ease;
+  flex: 0 1 auto;
+}
+
+.in_button:hover {
+  font-weight: bolder;
+  color: gray;
+}
+.community_poto{
+  max-height: 100%;
+  max-width: 100%;
+}
+/* 메인 바디 */
+.main_body{
+  width: 100%;
+  padding-top: 0px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 150px auto 200px;
+  grid-template-areas: 
+      "header"
+      "main"
+      "footer"
+  ;
+
+}
+
+/* 해더 디자인 */
+.header{
+  grid-area: header;
+  width: 100%;
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas: 
+      "dummy"
+      "background_header"
+  ;
+}
+.background_header{
+  grid-area: background_header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.manual_data{
+  width: 80%;
+  display: grid;
+  height: 80%;
+  grid-template-columns: auto;
+  grid-template-rows: 99% 1%;
+  grid-template-areas: 
+      "background_menu"
+      "manual_underbar"
+  ;
+}
+
+.background_menu{
+  grid-area: background_menu;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background_data{
+  width: 100%;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+      "menual_1 dummy menual_2"
+  ;
+}
+
+.menual_1{
+  grid-area: menual_1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+
+.menual_2{
+  font-size: 150%;
+  grid-area: menual_2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 300px;
+}
+
+body > div > main > div > div.header > div.background_header > div > div.background_menu > div > div.menual_2 > button {
+  font-size: 16px;
+  line-height: 20px;
+  border-right: 1px solid var(--color-black);
+  padding: 0 20px;
+  width: 100px;
+  margin-top: 10px;
+}
+
+body > div > main > div > div.header > div.background_header > div > div.background_menu > div > div.menual_2 > button:last-child {
+  border: none;
+}
+
+.manual_underbar{
+  grid-area: manual_underbar;
+  background-color: gray;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  /* background-color: #f0f0f0; */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.community_body {
+  width: 100%;
+}
+
+.community_main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.community_main_body {
+  width: calc(50% - 20px); /* 두 개의 요소 사이에 20px 간격을 유지 */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* border-radius: 10px; */
+}
+.main_title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+}
+
+.community_poto img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* border-radius: 10px; */ /* 이미지 모서리를 둥글게 */
+}
+
+#main > div > div.community_footer > button {
+  margin: 50px 0;
+  width: 300px;
+  height: 50px;
+  border: 0;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+#pagination > button {
+  width: 30px;
+  line-height: 30px;
+  border: 0;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+#pagination > button.active {
+  border: 1px solid var(--color-green);
+  background-color: var(--color-beige);
+  color: var(--color-green);
+}

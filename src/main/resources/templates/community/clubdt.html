@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun},
+               s_numid=${session?.loginMember?.memberId}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}"
+      th:data-s-numid="${s_numid}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동호회</title>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <input type="text" name="" id="clubId" th:value="${club.clubId}" hidden>
+        <input type="text" name="" id="code" th:value="${club.code}" hidden>
+<!--        <link rel="stylesheet" href="@{}">-->
+        <script type="module" th:src="@{/js/community/clubdt.js}"></script>
+        <link rel="stylesheet" th:href="@{/css/community/clubdit.css}">
+        <div class="body" th:object="${bbs}">
+          <div class="header">
+            <div class="dummy"></div>
+            <div class="tilte">상세 조회</div>
+            <div class="underbar"></div>
+            <div class="dummy"></div>
+          </div>
+          <div class="body">
+            <div class="blog_title" th:text="${club.title}"></div>
+            <div class="name"th:text="'닉네임 : ' + ${club.nickname}"></div>
+            <div class="poto" id="imageContainer"></div>
+            <div class="textarea" th:text="${club.ccontent}"></div>
+            <div class="rebuer"  th:text="'모집인원 : ' + ${club.recruit}"></div>
+            <div class="dummy"></div>
+          </div>
+          <div class="set_button">
+            <th:block th:if="${session.loginMember}">
+              <th:block th:if="${s_nickname == club.nickname}">
+                <button type="button" class="community_button" id="modifyBtn">수정</button>
+              </th:block>
+              <th:block th:if="${s_nickname == club.nickname}">
+                <th:block th:unless="${session.loginMember.gubun == 'M'}">
+                  <button type="button" class="community_button" id="deleteBtn">삭제</button>
+                </th:block>
+              </th:block>
+              <th:block th:if="${session.loginMember.gubun == 'M'}">
+                <button type="button" class="community_button" id="deleteBtn">삭제</button>
+              </th:block>
+            </th:block>
+          <button class="community_button" onclick="location.href='http://localhost:9080/community/clubAll' ">목록</button>
+          </div>
+
+          <div class="comment-wrap">
+            <div>댓글</div>
+            <div>
+              <th:block th:if="${session.loginMember}">
+              <input type="hidden" id="memberId" th:value="${session.loginMember.memberId}"> <!-- 실제 로그인한 회원의 memberId를 넣어야 합니다 -->
+              <input type="text" id="comments" placeholder="댓글 입력"></input>
+              <button id="submit-comment">댓글 등록</button>
+              </th:block>
+            </div>
+            <div id="comments-container">
+              <!-- 댓글 내용이 들어갈 곳 -->
+            </div>
+          </div>
+          <div class="footer" id="footer"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

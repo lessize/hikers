@@ -1,0 +1,225 @@
+/* 라인 정비 */
+/* *{outline: 1px solid red;} */
+
+/* 전체 정렬 */
+body{
+  margin: 0;
+  padding: 0;
+}
+
+/* 폰트 및 아이콘 */
+.header_font{
+  color: #ffff;
+  font-size:xx-large;
+}
+
+.menual_font_1{
+  font-size:x-large;
+}
+
+.button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer; 
+}
+
+.button:hover {
+  font-weight: bolder;
+}
+
+.check_button{
+  font-weight: bolder;
+}
+
+.runing_time_font{
+  width: 30px;
+}
+
+.title_font{
+  width: 100%;
+}
+
+.detail_font{
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+
+.select_size{
+  width: 80%;
+}
+
+/* 바디 위치 지정 */
+.main_body{
+  width: 100%;
+  padding-top: 0px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 150px auto 200px;
+  grid-template-areas: 
+      "header"
+      "main"
+      "footer"
+  ;
+}
+
+/* 해더 디자인 */
+.header{
+  grid-area: header;
+  width: 100%;
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas: 
+      "background_header"
+      "background_menu"
+  ;
+}
+
+.background_header{
+  background-color: #173221;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.background_menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manual{
+  grid-area: header;
+  width: 80%;
+  display: grid;
+  height: 80%;
+  grid-template-columns: auto;
+  grid-template-rows: 99% 1%;
+  grid-template-areas: 
+      "manual_data"
+      "manual_underbar"
+  ;
+}
+
+.manual_underbar{
+  grid-area: manual_underbar;
+  background-color: gray;
+}
+
+.manual_data{
+  grid-area: manual_data;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manual_text{
+  width: 95%;
+  display: grid;
+  height: 65%;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "menual_1"
+  ;
+}
+
+.menual_1{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.menual_2{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* 메인 배이스 */
+.main{
+  display: flex;
+  justify-content: center;
+}
+
+.label{
+  width: 50%;
+  display: grid;
+  height:100%;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr 1fr 15fr 1fr 1fr;
+  grid-template-areas: 
+    "community"
+    "text_title"
+    "text_detail"
+    "hidden"
+    "set_button"
+  ;
+}
+
+/* 내부 데이터 */
+.community{
+  display: grid;
+  height:100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "in_community_label"
+  ;
+}
+
+.in_community{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create_day{
+  display: grid;
+  height:100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "in_create_day_label in_create_day_code1 dummy dummy"
+  ;
+}
+
+
+/* 제목 */
+
+
+
+/* 본문 */
+
+
+
+/* 사진 선택 */
+
+.attachment{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+/* 완료 버튼 */
+
+.set_button{
+  display: grid;
+  height:100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "registration cancel"
+  ;
+}
+
+.button{
+  width: 80%;
+  height: 100%;
+  background-color: lightgray;
+}
+.button:hover{
+  background-color: gray;
+}

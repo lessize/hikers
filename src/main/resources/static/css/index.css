@@ -1,0 +1,194 @@
+main > section:not:last-child {
+  background-color: var(--color-beige);
+}
+
+/* 메인 */
+#main_sec {
+  width: 80vh;
+  height: 80vh;
+
+  background-color: var(--color-beige);
+  overflow: hidden;
+}
+
+video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: 80%;
+  background-color: aliceblue;
+  object-fit: fill;
+}
+
+video source {
+  width: 100%;
+  height: 100%;
+}
+
+#main_sec .main_text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  background-color: transparent;
+}
+
+#main_sec .main_text h2 {
+  background-color: transparent;
+}
+
+#main_sec .main_text h2 img {
+  width: 400px;
+  background-color: transparent;
+}
+
+#main_sec .main_text p {
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+/* 날씨 정보 */
+#weather_sec {
+  background-color: var(--color-beige);
+  padding-top: 300px;
+}
+
+
+#weather_sec > div.weather_wrap > h3,
+#weather_sec > div.weather_wrap > h3 > span {
+  font-size: 4vh;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+#weather_sec > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#weather_sec > div > div > div {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#weather_sec > div > div > div > h3 {
+  font-weight: bold;
+  line-height: 30px;
+  font-size: 18px;
+}
+
+
+/* 산불 정보 */
+#fire_sec {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  background-color: var(--color-beige);
+}
+
+#fire_sec > .fire_wrap {
+  /*width: 1600px;
+  margin: 0 auto; */
+}
+
+#fire_sec > .fire_wrap > h3 {
+  font-size: 4vh;
+  font-weight: bold;
+  text-align: center;
+}
+
+#fire_sec > .fire_wrap > p
+{
+  line-height: 30px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+#fire_sec > .fire_wrap > .fire_box {
+  display: flex;
+  justify-content: center;
+}
+
+#fire_sec > .fire_wrap > .fire_box img {
+  width: 200px;
+}
+
+#fire_sec > .fire_wrap > .fire_box .fire-alert {
+  display: flex;
+  justify-content: space-around;
+}
+
+#fire_sec > .fire_wrap > .fire_box .fire-alert ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+#fire_sec > .fire_wrap > .fire_box .fire-alert ul li:first-child {
+  font-weight: bold;
+  font-size: 2.5vh;
+}
+
+
+/* 이미지 */
+#gallery_sec .gallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#gallery_sec .gallery .gall_text {
+  height: 800px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+#gallery_sec .gallery .gall_text p {
+  background-color: var(--color-green);
+  font-size: 5vh;
+  font-weight: bold;
+}
+
+#gallery_sec .gallery .gall_img_box {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -10;
+}
+
+.gall_img_box > div {
+    width: 100%;
+    height: 100vh; /* 각 이미지가 화면 높이를 차지하게 설정 */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.gall_img1 {
+    width: 100%;
+    height: 100%;
+}

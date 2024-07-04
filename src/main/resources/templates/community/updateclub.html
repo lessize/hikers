@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동호회</title>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main class="main_body">
+        <link rel="stylesheet" href="/css/community/addclub.css">
+        <script type="text/javascript" src="/js/community/addclub.js" defer></script>
+        <div class="header">
+          <div class="background_menu">
+            <div class="manual">
+              <div class="manual_data">
+                <div class="manual_text">
+                  <div class="menual_1">
+                    <div class="menual_font_1">동호회 작성</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manual_underbar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="main" id="main">
+          <form class="label" action="/community/addclub" method="post" enctype="multipart/form-data">
+            <div class="community">
+              <div class="in_community_label in_community">
+                <label class="menual_font_1">동호회 모집</label>
+              </div>
+            </div>
+            <div class="date">
+              <div class="in_date_label in_community"><label for="date">일정 시간</label></div>
+              <div class="in_date_code1 in_community">
+                <input type="date" id="date" name="date">
+              </div>
+              <div class="mntn_code_label in_community"><label for="mntnNm">산명</label></div>
+              <div class="mntn_code_code in_community">
+                <input class="in_community" type="text" name="mntnNm" id="mntnNm" >
+                <button id="searchButton">검색</button>
+              </div>
+            </div>
+            <div class="personnel">
+              <div class="in_personnel_label in_community"><label for="personnel">모집 인원</label></div>
+              <div class="in_personnel_code1">
+                <input class="runing_time_font " type="text" name="personnel" id="personnel" th:value="${club.recruit}">
+              </div>
+              <div class="in_personnel_code2"><label>명</label></div>
+              <div class="mntn_select_label in_community"><label for="mntnLoc">주소명</label></div>
+              <div class="mntn_select_code in_community">
+                <select name="mntnLoc" id="mntnLoc" class="select_size">
+                  <option value="">==지역선택==</option>
+                  <option value="1">결과 없음</option>
+                </select>
+              </div>
+            </div>
+            <div class="text_title in_community">
+              <input class="title_font" type="text" name="title" id="title" th:value="${club.title}" placeholder="제목을 입력하세요">
+            </div>
+            <div class="text_detail in_community">
+              <textarea class="detail_font" name="bcontent" id="bcontent" placeholder="본문을 입력하세요...">[[${club.ccontent}]]</textarea>
+            </div>
+            <div class="attachment">
+              <label for="code">파일 선택:</label>
+              <input class="fileList" type="file" name="file" accept="image/png, image/jpeg" id="file">
+            </div>
+            <div class="set_button">
+              <div class="registration in_community"><button type="submit" class="button">등록</button></div>
+              <div class="cancel in_community"><button type="button" class="button" onclick="location.href='/community'">취소</button></div>
+            </div>
+          </form>
+        </div>
+        <div class="footer"></div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

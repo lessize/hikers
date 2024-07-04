@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html id="root"
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main(
+        title,          <!--/* title */-->
+        <!--/*--------------------------*/-->
+        <!--/* external */-->
+        styles,
+        scripts,
+        <!--/* internal */-->
+        style,
+        script,
+        <!--/*--------------------------*/-->
+        gnb,              <!--/* gnb  */-->
+        main              <!--/* main */-->
+      )"
+
+      th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--common style-->
+  <link rel="stylesheet" th:href="@{/css/common/common.css}">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"/>
+
+  <th:block th:replace="${styles}"/>
+  <th:block th:replace="${style}"/>
+
+  <title th:replace=${title}>제목</title>
+</head>
+<body>
+<div class="wrap">
+  <div id="header" th:replace="~{fragment/header::header}"/>
+  <div id="gnb" th:replace="${gnb}"/>
+  <div id="searchMenu" th:replace="~{fragment/searchMenu::searchMenu}"/>
+  <div id="content" th:replace="${main}"/>
+  <div id="foot" th:replace="~{fragment/footer::footer}"/>
+</div>
+
+<th:block th:replace="${scripts}"/>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"  defer></script>
+<script src="https://kit.fontawesome.com/c688b8b455.js" crossorigin="anonymous"  defer></script>
+<script th:src="@{/js/common/common.js}"></script>
+<th:block th:replace="${script}"/>
+</body>
+</html>

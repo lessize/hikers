@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의하기</title>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main th:main="mainContent">
+        <script th:inline="javascript">
+          window.totalCnt = [[${totalCnt}]];
+          window.cpgs = [[${cpgs}]];
+          window.cp = [[${cp}]];
+        </script>
+        <link rel="stylesheet" th:href="@{/css/community/communitycontact.css}">
+        <script type="module" th:src="@{/js/community/allContact.js}"></script>
+        <div class="main_body">
+          <div class="header">
+            <div class="dummy"></div>
+            <div class="background_header">
+              <div class="manual_data">
+                <div class="background_menu">
+                  <div class="background_data">
+                    <div class="menual_1">
+                      <div class="title_font">문의함</div>
+                    </div>
+                    <div class="dummy"></div>
+                    <div class="menual_2">
+                      <button class="in_button" onclick="location.href='http://localhost:9080/community' ">등산일지</button>
+                      <button class="in_button" onclick="location.href='http://localhost:9080/community/clubAll' ">동호회</button>
+                      <button class="in_button check_button" onclick="location.href='http://localhost:9080/community/contactAll' ">문의하기</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="manual_underbar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="main_title">
+            <div class="main" id="main">
+              <div class="community_body">
+                <div class="community_header">
+                  <div class="community_main_text">
+                    <div class="community_main_font">문의하기</div>
+                  </div>
+                </div>
+                <div class="community_main" >
+                    <table>
+                      <thead>
+                      <tr>
+                        <th>순서 ID</th>
+                        <th>회원 ID</th>
+                        <th>문의 제목</th>
+                        <th>문의 내용</th>
+                        <th>문의 상태</th>
+                        <th>문의 생성 일시</th>
+                        <th>문의 수정 일시</th>
+                      </tr>
+                      </thead>
+                      <tbody id="rows">
+                      <tr class="row" th:each="manager : ${list}" th:data-manager-id="${manager.inquiryId}">
+                        <td th:text="${manager.inquiryId}">순서 ID</td>
+                        <td th:text="${manager.memberId}">회원 ID</td>
+                        <td th:text="${manager.inquiryTitle}">문의 제목</td>
+                        <td th:text="${manager.inquiryContent}">문의 내용</td>
+                        <td th:text="${manager.inquiryState}">문의 상태</td>
+                        <td th:text="${manager.inquiryCdate}">문의 생성 일시</td>
+                        <td th:text="${manager.inquiryUdate}">문의 수정 일시</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <div class="community_footer">
+                  <th:block th:if="${session.loginMember}">
+                    <button class="community_button" onclick="location.href='http://localhost:9080/community/addcontact' ">글 작성하기</button>
+                  </th:block>
+                  <th:block th:unless="${session.loginMember}">
+                    <button class="community_button" onclick="location.href='http://localhost:9080/members/login' ">글 작성하기</button>
+                  </th:block>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer" id="pagination"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+/* 태그 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-size: 2vh;
+  font-weight: 300;
+  color: inherit;
+  box-sizing: border-box;
+  text-align: center;
+}

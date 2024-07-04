@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::style},              <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자-게시판</title>
+  <style>
+    .con {
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top : 50px;
+      margin-bottom : 50px;
+    }
+
+    .table-container {
+      width: 80%;
+      margin-top : 50px;
+      margin-bottom : 50px;
+    }
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    #frm {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tbl-header {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .tbl-content {
+      height: 500px;
+      overflow-x: auto;
+      margin-top: 0px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    th {
+      background-color: #f2f2f2;
+      padding: 20px 15px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 15px;
+      color: #000000;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 15px;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: 300;
+      font-size: 15px;
+      color: #000000;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 25%;
+    }
+
+    td:nth-child(3) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 8%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    .search-form {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-select, .search-input, .search-button {
+      margin-right: 10px;
+    }
+
+    .search-select, .search-input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .search-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .search-select {
+      text-align: center; /* 선택 옵션 텍스트 가운데 정렬 */
+    }
+    .search-button {
+      background-color: #173221;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .search-button:hover {
+      background-color: #45a049;
+    }
+    .buttons {
+      float: right;
+    }
+
+    .buttons button {
+      background-color: #173221;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::admin"/>
+  <div id="content">
+    <main>
+      <div class="con">
+        <h4>게시판 관리자</h4>
+        <div class="table-container">
+          <div class="search-buttons">
+            <form th:action="@{/manager/searchBbs}" method="get" onsubmit="handleSearch(event)" class="search-form">
+              <select name="searchType" class="search-select">
+                <option value="all" selected> 전체</option>
+                <option value="title">제목</option>
+                <option value="mntnName">산 이름</option>
+                <option value="nickname">작성자</option>
+              </select>
+              <input type="text" name="keyword" placeholder="검색어" class="search-input"/>
+              <button type="submit" class="search-button">검색</button>
+            </form>
+            <div class="buttons">
+              <button type="button" onclick="deleteSelectedBbs()">선택된 항목 삭제</button>
+              <button type="button" onclick="location.href='/manager/comBbs'">신고글 관리</button>
+            </div>
+          </div>
+          <form id="frm" method="POST">
+            <div class="tbl-header">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                  <th>선택</th>
+                  <th>작성자</th>
+                  <th>제목</th>
+                  <th>조회수</th>
+                  <th>작성일</th>
+                  <th>산 이름</th>
+                  <th>글 상태</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody id="rows">
+                <tr class="row" th:each="bbs : ${list}" th:data-bbs-id="${bbs.bbsId}">
+                  <td class="chk"><input type="checkbox" name="bbsIds" th:value="${bbs.bbsId}"/></td>
+                  <td th:text="${bbs.nickname}"></td>
+                  <td th:text="${bbs.title}"></td>
+                  <td th:text="${bbs.hit}"></td>
+                  <td th:text="${#temporals.format(bbs.cdate, 'yyyy년 MM월 dd일')}"></td>
+                  <td th:text="${bbs.mntnNm}"></td>
+                  <td th:text="${bbs.status == 'N' ? '-' : (bbs.status == 'W' ? '신고됨' : '기타')}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script th:inline="javascript">
+  // 제목 10글자 이상이면 그 이상은...으로 표현
+  document.addEventListener('DOMContentLoaded', function () {
+    const titleCells = document.querySelectorAll('td.title');
+    titleCells.forEach(cell => {
+      const text = cell.textContent;
+      if (text.length > 10) {
+        const shortenedText = text.substring(0, 10) + '...';
+        cell.textContent = shortenedText;
+      }
+    });
+  });
+  function deleteSelectedBbs() {
+    var selectedBbsIds = [];
+    var checkboxes = document.getElementsByName("bbsIds");
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        selectedBbsIds.push(checkboxes[i].value);
+      }
+    }
+    if (selectedBbsIds.length === 0) {
+      alert("삭제할 항목을 선택해주세요.");
+    } else {
+      if (confirm('선택한 ' + selectedBbsIds.length + '개의 항목을 삭제하시겠습니까?')) {
+        fetch('/manager/comBbs', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(selectedBbsIds)
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log(selectedBbsIds);
+              // 성공적으로 삭제된 경우에 대한 처리
+              location.reload(); // 페이지 새로고침
+            } else {
+              console.log(selectedBbsIds);
+              // 삭제에 실패한 경우에 대한 처리
+              alert('게시물 삭제에 실패하였습니다.');
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting bbs:', error);
+            alert('게시물 삭제 중 오류가 발생하였습니다.');
+          });
+      }
+    }
+  }
+  // 상세조회 click event리스너
+  document.getElementById('rows').addEventListener('click', function (evt) {
+    // input 요소 이면서 checkbox는 제외
+    if (evt.target.tagName === 'INPUT' && evt.target.getAttribute('type') === 'checkbox') {
+      return;
+    }
+    // td 요소 중 checkbox 있는 td는 제외
+    if (evt.target.tagName === 'TD' && evt.target.classList.contains('chk')) {
+      return;
+    }
+    const row = evt.target.closest('.row');
+    const bbsId = row.dataset.bbsId;
+
+    location.href = `/community/${bbsId}/detail`;
+  });
+
+  // select 요소 변경 시 이벤트 처리
+  document.getElementById('inquiryStatus').addEventListener('change', function() {
+    const selectedValue = this.value;
+    window.location.href = selectedValue; // 선택된 주소로 이동
+  });
+</script>
+</body>
+</html>

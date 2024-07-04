@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::style},              <!--/* style */-->
+      ~{::script},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘의 산 추천</title>
+  <style>
+    /* 컨테이너 스타일 설정 */
+    .container {
+      max-width: 1200px; /* 최대 너비 설정 */
+      margin: 0 auto; /* 중앙 정렬 */
+      padding: 20px; /* 패딩 설정 */
+    }
+
+    /* 목록 스타일 설정 */
+    .cont_list {
+      display: flex; /* Flexbox 사용 */
+      flex-wrap: wrap; /* 항목이 넘치면 다음 줄로 */
+      gap: 20px; /* 항목 사이의 간격 */
+      justify-content: center; /* 중앙 정렬 */
+      max-height: 800px; /* 최대 높이 설정 */
+      overflow-y: auto; /* 세로 스크롤바 설정 */
+    }
+
+    /* 항목 스타일 설정 */
+    .cont_list li {
+      flex: 0 1 calc(33.333% - 20px); /* 3개씩 배치, gap 만큼 공간 제외 */
+      display: flex; /* Flexbox 사용 */
+      flex-direction: column; /* 세로 방향 배치 */
+      align-items: center; /* 가운데 정렬 */
+    }
+    /* 산 목록 스타일 설정 */
+    .mntn_img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .mntn_details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mntn_name {
+      font-size: 1.5em; /* 폰트 크기 키움 */
+      font-weight: bold;
+      margin-bottom: 5px; /* 아래쪽 여백 설정 */
+    }
+
+    .mntn_loc, .mntn_diff {
+      margin-bottom: 5px; /* 아래쪽 여백 설정 */
+    }
+    h3 {
+      font-size: 32px; /* 기본값보다 큰 글자 크기 */
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <h3>개인별 산 추천 조회</h3>
+        <div class="container">
+          <ul class="cont_list">
+            <!-- Thymeleaf를 사용한 예시 -->
+            <li th:each="mountain : ${list}" th:data-mountain-id="${mountain.mntnCode}">
+              <div>
+                <img th:src="@{/recommend/image/{mntnCode}(mntnCode=${mountain.mntnCode})}" alt="Mountain Image" class="mntn_img"/>
+                <div class="mntn_details">
+                  <span th:text="${mountain.mntnNm}" class="mntn_name">산 이름</span>
+                  <span th:text="'위치: ' + ${mountain.mntnLoc}" class="mntn_loc">산 위치</span>
+                  <span th:switch="${mountain.mntnDffl}" class="mntn_diff">
+                  <span th:case="0">난이도: 쉬움</span>
+                  <span th:case="1">난이도: 보통</span>
+                  <span th:case="2">난이도: 어려움</span>
+                </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const items = document.querySelectorAll('.cont_list li');
+      items.forEach(item => {
+        item.addEventListener('click', function() {
+          const mntnCode = this.getAttribute('data-mountain-id');
+          window.location.href = `http://localhost:9080/service/search?mntnCode=${mntnCode}`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

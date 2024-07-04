@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#header},     <!--/* header */-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제목 채우기</title>
+</head>
+<body>
+<div class="wrap">
+  <!-- 로그인 전 -->
+  <div th:if="${session?.loginMember.nickname == null}" id="header" th:replace="fragment/header::beforeLoginHeader"/>
+  <!-- 로그인 후 -->
+  <div th:if="${session?.loginMember.nickname != null}" id="header" th:replace="fragment/header::afterLoginHeader"/>
+  <div id="gnb" th:replace="fragment/gnb::global"/>
+  <div id="content" >
+    <main>
+      <!--  이부분에 내용 채우기-->
+    </main>
+  </div>
+</div>
+</body>
+</html>

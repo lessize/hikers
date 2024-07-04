@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::style},              <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의글 개별 조회</title>
+  <style>
+    .con {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+   .table-wrap {
+    width: 80%;
+    margin-bottom : 90px;
+   }
+   .frm-wrap{
+     margin-top : 150px;
+     margin-bottom : 10px;
+     display: flex;
+     justify-content: center;
+  }
+   table {
+    width: 100%
+     border-collapse: collapse;
+     background-color: #fff;
+   }
+
+   th,
+   td {
+     border: 1px solid #ddd;
+     padding: 10px;
+     vertical-align: middle;
+     text-align: center;
+     height: 50px;
+   }
+
+   th {
+     background-color: #f2f2f2;
+     color: #333;
+     text-align: center;
+     width:280px;
+   }
+
+   td {
+    text-align: center;
+    font-weight: 300;
+    font-size: 18px;
+    width:770px;
+
+   }
+
+   input[type="text"],
+   select {
+     width: calc(100% - 20px);
+     padding: 12px;
+     margin-top: 5px;
+     margin-bottom: 5px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+     font-weight: 300;
+     font-size: 18px;
+   }
+
+   input[type="text"] {
+     padding: 50px;
+     font-weight: 300;
+     font-size: 18px;
+   }
+  .btn-wrap {
+    width : 50%
+    text-align: center;
+    margin-top: 5px;
+    box-sizing: border-box;
+    float : right;
+    }
+
+    .btn-wrap button {
+    margin-right: 10px;
+    }
+
+   button {
+     background-color: #173221;
+     color: white;
+     padding: 10px 20px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+   }
+
+   button:hover {
+     background-color: #45a049;
+   }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::admin"/>
+  <div id="content">
+    <main>
+      <div class="con">
+        <h4>문의글</h4>
+        <div class="container">
+          <div class="table-wrap">
+            <div class="frm-wrap">
+              <form id="frm" method="post" action="/manager/${inquiry.inquiryId}/comment">
+                <input type="hidden" name="_method" value="patch">
+                <table>
+                  <tr>
+                    <th>문의글 아이디</th>
+                    <td id="inquiryId" th:text="${inquiry.inquiryId}"></td>
+                  </tr>
+                  <tr>
+                    <th>작성자</th>
+                    <td th:text="${inquiry.nickname}"></td>
+                  </tr>
+                  <tr>
+                    <th >제목</th>
+                    <td th:text="${inquiry.inquiryTitle}"></td>
+                  </tr>
+                  <tr>
+                    <th style="height: 100px;">내용</th>
+                    <td style="height: 150px;" th:text="${inquiry.inquiryContent}"></td>
+                  </tr>
+                  <tr>
+                    <th>작성일자</th>
+                    <td th:text="${#temporals.format(inquiry.inquiryCdate,'yyyy년 MM월 dd일')}"></td>
+                  </tr>
+                  <tr>
+                    <th>수정일자</th>
+                    <td th:text="${#temporals.format(inquiry.inquiryUdate,'yyyy년 MM월 dd일')}"></td>
+                  </tr>
+                  <tr>
+                    <th><label for="inquiryState">처리상태</label></th>
+                    <td>
+                      <select id="inquiryState" name="inquiryState">
+                        <option value="">처리 전</option>
+                        <option value="P">처리 중</option>
+                        <option value="C">처리 완료</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><label for="inquiryComment">답변내용</label></th>
+                    <td><input id="inquiryComment" name="inquiryComment" type="text"
+                               th:value="${inquiry.inquiryComment}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>답변일자</th>
+                    <td th:text="${#temporals.format(inquiry.inquiryCommentCdate,'yyyy년 MM월 dd일')}"></td>
+                  </tr>
+                </table>
+                <div class="btn-wrap">
+                  <button type="button" onclick="location.href='/manager/viewInquiryAll'">목록</button>
+                  <button type="submit">답변 등록</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+</div>
+</div>
+<script>
+  document.getElementById('frm').addEventListener('submit', function (event) {
+    event.preventDefault(); // 폼 제출 방지
+
+    // 문의글 아이디 추출
+    var inquiryId = document.getElementById('inquiryId').textContent.trim();
+    var inquiryComment = document.getElementById('inquiryComment').value;
+    var inquiryState = document.getElementById('inquiryState').value;
+
+    if (!inquiryComment.trim() && !inquiryState) {
+      console.log('inquiryId : ' + inquiryId)
+      console.log('답변 내용 : ' + inquiryComment)
+      console.log('처리 상태 : ' + inquiryState)
+      alert("처리 상태와 답변을 입력하세요");
+      return;
+    }
+    fetch(`/manager/${inquiryId}/comment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        inquiryComment: inquiryComment,
+        inquiryState: inquiryState
+      })
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('네트워크 오류');
+          }
+          return response.text().then(text => {
+            try {
+              return JSON.parse(text);
+            } catch (error) {
+              console.error('응답 파싱 오류:', error);
+              throw new Error('서버 응답이 JSON 형식이 아닙니다.');
+            }
+          });
+        })
+        .then(data => {
+          alert('답변 등록 완료');
+          console.log('inquiryId : ' + inquiryId)
+          console.log('답변 내용 : ' + inquiryComment)
+          console.log('처리 상태 : ' + inquiryState)
+          window.location.href = `/manager/detail?inquiryId=${inquiryId}`;
+        })
+        .catch(error => {
+          console.error('오류 발생:', error);
+          alert('오류가 발생하여 답변을 제출할 수 없습니다.');
+        });
+    });
+</script>
+</body>
+</html>

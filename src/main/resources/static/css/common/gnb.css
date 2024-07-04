@@ -1,0 +1,258 @@
+/* 내비게이션 */
+aside#nav_btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  z-index: 10000;
+  background-color: var(--color-beige);
+}
+
+aside#nav_btn .btn_box .webapp_cover {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  width: 39px;
+  margin: 0 auto;
+  transform: translateY(-50%) scale(1.5);
+}
+
+aside#nav_btn .btn_box .menu_button {
+  width: 39px;
+  overflow: hidden;
+}
+
+aside#nav_btn .btn_box #menu_checkbox {
+  display: none;
+}
+
+aside#nav_btn .btn_box #menu_label {
+  position: relative;
+  display: block;
+  height: 29px;
+  cursor: pointer;
+}
+
+aside#nav_btn .btn_box #menu_label:before,
+aside#nav_btn .btn_box #menu_label:after,
+aside#nav_btn .btn_box #menu_text_bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #333;
+}
+
+aside#nav_btn .btn_box #menu_label:before,
+aside#nav_btn .btn_box #menu_label:after {
+  content: "";
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) left;
+}
+
+aside#nav_btn .btn_box #menu_label:before {
+  top: 0;
+}
+
+aside#nav_btn .btn_box #menu_label:after {
+  top: 12px;
+}
+
+aside#nav_btn .btn_box #menu_text_bar {
+  top: 24px;
+}
+
+aside#nav_btn .btn_box #menu_text_bar:before {
+  content: "MENU";
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Pretendard-Bold", Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+aside#nav_btn .btn_box #menu_checkbox:checked + #menu_label:before {
+  left: -39px;
+}
+
+aside#nav_btn .btn_box #menu_checkbox:checked + #menu_label:after {
+  left: 39px;
+}
+
+aside#nav_btn .btn_box #menu_checkbox:checked + #menu_label #menu_text_bar:before {
+  animation: moveUpThenDown 0.8s ease 0.2s forwards,
+    shakeWhileMovingUp 0.8s ease 0.2s forwards,
+    shakeWhileMovingDown 0.2s ease 0.8s forwards;
+}
+
+@keyframes moveUpThenDown {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -27px;
+  }
+  100% {
+    top: -14px;
+  }
+}
+
+@keyframes shakeWhileMovingUp {
+  0% {
+    transform: rotateZ(0);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  50% {
+    transform: rotateZ(0deg);
+  }
+  75% {
+    transform: rotateZ(10deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+@keyframes shakeWhileMovingDown {
+  0% {
+    transform: rotateZ(0);
+  }
+  80% {
+    transform: rotateZ(3deg);
+  }
+  90% {
+    transform: rotateZ(-3deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+nav {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-green);
+  position: fixed;
+  top: 0;
+  left: -300%;
+  transition: left 0.6s ease;
+  z-index: 9;
+}
+
+nav.nav_active {
+  left: 0;
+}
+
+nav .nav_box {
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+  align-items: stretch;
+  height: 100%;
+}
+
+nav .nav_box .deco {
+  line-height: 80px;
+  background-color: var(--color-green);
+}
+
+nav .nav_box .deco .fa-ellipsis {
+  background-color: var(--color-green);
+  color: var(--color-white);
+  font-size: 40px;
+}
+
+nav .nav_box .nav_list {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  height: 100%;
+  position: relative;
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list div {
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list h3 {
+  position: relative;
+  background-color: var(--color-green);
+}
+
+
+nav .nav_box .nav_list h3 img {
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  background-color: var(--color-green);
+  transform: rotate(90deg);
+  width: 200px;
+  text-align: center;
+}
+
+nav .nav_box .nav_list .menu_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list .menu_list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1600px;
+  padding-left: 12%;
+  line-height: 100px;
+  background-color: var(--color-green);
+  color: #fff;
+}
+
+nav .nav_box .nav_list .menu_list > li h3 {
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list .menu_list > li h3 a {
+  font-size: 4vh;
+  font-weight: 600;
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list .menu_list span {
+  width: 70vh;
+  height: 2px;
+  background-color: #a7a7a7;
+}
+
+nav .nav_box .nav_list .menu_list .menu_sublist {
+  line-height: 22px;
+  background-color: var(--color-green);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+nav .nav_box .nav_list .menu_list .menu_sublist li {
+  background-color: var(--color-green);
+}
+
+nav .nav_box .nav_list .menu_list .menu_sublist li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+nav .nav_box .nav_list .menu_list .menu_sublist li a {
+  background-color: var(--color-green);
+  color: #a7a7a7;
+  transition: color 0.3s ease-in-out;
+}
+
+nav .nav_box .nav_list .menu_list .menu_sublist li a:hover {
+  color: #fff;
+}

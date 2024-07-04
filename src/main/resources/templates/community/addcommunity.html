@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후기 작성</title>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <link rel="stylesheet" th:href="@{/css/community/addcommunity.css}">
+        <script type="text/javascript" th:src="@{/js/community/addcommunity.js}"></script>
+        <div class="main_body">
+          <div class="header">
+            <div class="background_header">
+              <div class="header_font"></div>
+            </div>
+            <div class="background_menu">
+              <div class="manual">
+                <div class="manual_data">
+                  <div class="manual_text">
+                    <div class="menual_1">
+                      <div class="menual_font_1">게시글 작성</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="manual_underbar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="main" id="main">
+            <form class="label" action="/community/addcommunity" method="post" enctype="multipart/form-data">
+              <div class="community">
+                <div class="in_community_label in_community">
+                  <label class="menual_font_1">등산 일지</label>
+                </div>
+              </div>
+              <div class="tag">
+                <div class="in_tag_label"><label>태그 추가</label></div>
+                <div class="in_tag_code1 in_grid">
+                  <div><input type="checkbox" name="tags" value="주차장있어요" id="park"><label for="park">주차장있어요</label></div>
+                  <div><input type="checkbox" name="tags" value="경사심해요" id="high"><label for="high">경사심해요</label></div>
+                </div>
+                <div class="in_tag_code2 in_grid">
+                  <div><input type="checkbox" name="tags" value="화장실많아요" id="toilet"><label for="toilet">화장실많아요</label></div>
+                  <div><input type="checkbox" name="tags" value="케이블카있음" id="cable"><label for="cable">케이블카있음</label></div>
+                </div>
+                <div class="in_tag_code3 in_grid">
+                  <div><input type="checkbox" name="tags" value="계단많아요" id="stairs"><label for="stairs">계단많아요</label></div>
+                  <div><input type="checkbox" name="tags" value="급수대많아요" id="drinking"><label for="drinking">급수대많아요</label></div>
+                </div>
+                <input type="hidden" id="checkboxData" name="checkboxData">
+              </div>
+              <div class="runing_time">
+                <div class="in_runing_time_label in_community"><label for="ctime">등산 시간</label></div>
+                <div class="in_runing_time_code1"><input class="runing_time_font" type="text" name="ctime" id="ctime"></div>
+                <div class="in_runing_time_code2"><label>시간</label></div>
+                <div class="mntn_code_label in_community"><label for="mntnNm">산명</label></div>
+                <div class="mntn_code_code in_community">
+                  <input type="text" name="mntnNm" id="mntnNm" placeholder="산명을 입력하세요.">
+                  <button id="searchButton">검색</button>
+                </div>
+              </div>
+              <div class="star">
+                <div class="in_star_label in_community"><label>별점</label></div>
+                <div class="in_star_code1 in_community">
+                  <select name="staring" id="staring">
+                    <option value="">==선택==</option>
+                    <option value="1">☆☆☆☆★</option>
+                    <option value="2">☆☆☆★★</option>
+                    <option value="3">☆☆★★★</option>
+                    <option value="4">☆★★★★</option>
+                    <option value="5">★★★★★</option>
+                  </select>
+                </div>
+                <div class="mntn_select_label in_community"><label for="mntnLoc">주소명</label></div>
+                <div class="mntn_select_code in_community">
+                  <select name="mntnLoc" class="select_size" id="mntnLoc">
+                    <option value="000000">==지역선택==</option>
+                    <option value="1">결과 없음</option>
+                  </select>
+                </div>
+                <div id="searchResults" class="mntn_code_code in_community"></div>
+              </div>
+              <div class="text_title in_community">
+                <input class="title_font" type="text" name="title" id="title" placeholder="제목을 입력하세요">
+              </div>
+              <div class="text_detail in_community">
+                <textarea class="detail_font" name="bcontent" id="bcontent" placeholder="본문을 입력하세요..."></textarea>
+              </div>
+              <div class="attachment">
+                <label for="file">파일 선택:</label>
+                <input class="fileList" type="file" name="file" accept="image/png, image/jpeg"  id="file">
+              </div>
+              <div class="set_button">
+                <div class="registration in_community"><button type="submit" is="communityForm" class="button">등록</button></div>
+                <div class="cancel in_community"><button type="button" class="button" onclick="location.href='/community'">취소</button></div>
+              </div>
+            </form>
+          </div>
+          <div class="footer"></div>
+          </div>
+        </main>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+

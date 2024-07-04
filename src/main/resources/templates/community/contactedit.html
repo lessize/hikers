@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun},
+               s_numid=${session?.loginMember?.memberId}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}"
+      th:data-s-numid="${s_numid}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의하기</title>
+</head>
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::global"/>
+  <div id="content" >
+    <main>
+      <input type="text" name="" id="inquiryId" th:value="${manager.inquiryId}" hidden>
+      <link rel="stylesheet" href="/css/community/contactdit.css">
+      <script type="module" th:src="@{/js/community/cobdt.js}"></script>
+      <link rel="stylesheet" th:href="@{/css/community/contactedit.css}">
+      <title>문의 등록</title>
+      <div class="main_body" th:object="${manager}">
+        <div class="header" >
+          <div class="background_header">
+            <div class="header_font"></div>
+          </div>
+          <div class="background_menu">
+            <div class="manual">
+              <div class="manual_data">
+                <div class="manual_text">
+                  <div class="menual_1">
+                    <div class="menual_font_1">문의 조회</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manual_underbar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="main" id="main">
+          <div class="community">
+            <div class="title in_community">
+              <label class="menual_font_1">문의</label>
+            </div>
+
+            <div class="text_title in_community">
+              <div class="title_font" type="text" name="title" id="title" th:text="${manager.inquiryTitle}"></div>
+              <div class="text_detail in_community">
+                <div class="detail_font" name="bcontent" id="bcontent" th:text="${manager.inquiryContent}" ></div>
+              </div>
+              <div class="detail_font" name="bcontent" id="bcontent" th:text="'답변 : ' + ${manager.inquiryComment}" ></div>
+              <div class="in_time">
+                <div><span th:text="${manager.InquiryCdate}" ></span> : 생성일자</div>
+                <div><span th:text="${manager.InquiryUdate}" ></span> : 수정일자</div>
+              </div>
+              <div class="USER_name"  th:text="'닉네임 : ' + ${manager.nickname}"></div>
+              <div class="dummy"></div>
+              <div class="set_button">
+                <th:block th:if="${session.loginMember}">
+                  <th:block th:if="${s_numid == manager.nickname}">
+                    <button type="button" class="community_button" id="modifyBtn">수정</button>
+                  </th:block>
+                </th:block>
+                <div class="cancel in_community"><button class="community_button" onclick="location.href='http://localhost:9080/community/contactAll' ">목록</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="footer"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>
+

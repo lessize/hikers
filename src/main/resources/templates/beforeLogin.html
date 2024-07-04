@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{::link},        <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::link},        <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <title>H!KERS</title>
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <section id="main_sec">
+          <video autoplay muted loop>
+            <source th:src="@{/img/video/video.mp4}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="main_text">
+            <h2><img th:src="@{/img/logo/logo_white.png}" alt=""></h2>
+            <p>Hi! Hikers!</p>
+            <p>하이커스와 함께 산으로 떠나보세요!</p>
+          </div>
+        </section>
+        <section id="weather_sec">
+          <div class="weather_wrap">
+            <h3>날씨를 알려줘!</h3>
+            <div class="weather"></div>
+          </div>
+        </section>
+        <section id="fire_sec">
+          <div class="fire_wrap">
+            <h3>언제나 산불 조심!</h3>
+            <p>지금 가장 위험한 지역은?</p>
+            <div class="fire_box">
+<!--              <div><img th:src="@{/img/index/fire.png}" alt=""></div>-->
+              <div class="fire-alert"></div>
+            </div>
+          </div>
+        </section>
+        <section id="gallery_sec">
+          <div class="gallery">
+            <div class="gall_text">
+              <p>H!KER'S<br/>Gallery</p>
+            </div>
+            <div class="gall_img_box">
+              <div class="gall_img1"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script th:src="@{/js/index.js}"></script>
+  <script th:src="@{/js/member/fireInfo.js}"></script>
+  <script>
+    // 랜덤 이미지
+    document.addEventListener("DOMContentLoaded", function() {
+        const images = [
+            '/img/index/0.jpg',
+            '/img/index/1.jpg',
+            '/img/index/2.jpg',
+            '/img/index/3.jpg',
+            '/img/index/4.jpg',
+            '/img/index/5.jpg',
+            '/img/index/6.jpg',
+            '/img/index/7.jpg',
+            '/img/index/8.jpg',
+            '/img/index/9.jpg'
+        ];
+
+        // console.log('click1');
+
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        document.querySelector('.gall_img1').style.backgroundImage = `url(${randomImage})`;
+
+        // console.log('click2');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+<th:block th:fragment="header">
+  <header>
+    <div class="container">
+      <h1><img th:src="@{/img/logo/logo_green.png}" alt="H!KERS"></h1>
+      <ul class="header_list">
+        <li th:if="${session.loginMember == null}">
+          <a id="loginLink" th:href="@{/members/login}">로그인</a>
+        </li>
+        <li th:if="${session.loginMember == null}">
+          <a th:href="@{/members/join}">회원가입</a>
+        </li>
+        <li th:if="${session.loginMember != null}">
+          <a th:href="@{/members/profile}">
+            <span th:text="${session.loginMember.nickname}"></span>
+          </a>
+        </li>
+        <li th:if="${session.loginMember != null}">
+          <a href="#" id="logout" style="cursor:pointer">로그아웃</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+</th:block>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::link},        <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <title>회원가입</title>
+  <link rel="stylesheet" th:href="@{/css/member/joinForm.css}">
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <h3>회원가입</h3>
+        <div></div>
+        <form class="frm" id="signupForm" method="POST" action="/members/join">
+          <ul class="mem_info">
+            <li>
+              <div>
+                <label for="id">아이디</label><input type="email" name="id" id="id" placeholder="이메일 입력"><button type="button" id="send_btn">인증번호 발송</button>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="id_chk">인증번호</label><input type="text" name="id_chk" id="id_chk" placeholder="인증번호 입력"><button type="button" id="chk_btn">인증하기</button>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="pw">비밀번호</label><input type="password" name="pw" id="pw" placeholder="비밀번호 입력(영문,숫자,특수문자 포함 8~20자)"><span class="not_valid"></span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="pw_chk">비밀번호 확인</label><input type="password" name="pw_chk" id="pw_chk" placeholder="비밀번호 재입력"><span class="not_equal"></span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="nickname">닉네임</label><input type="text" name="nickname" id="nickname" placeholder="닉네임 입력(1~10)">
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="tel">연락처</label><input type="text" name="tel" id="tel"  placeholder="휴대폰 번호 입력('-' 포함)">
+              </div>
+            </li>
+            <li>
+              <div>
+                <label>성별</label>
+                <input type="radio" name="gender" id="male" value="남자" style="transform: scale(0.5); width: 50px;">
+                <label for="male" class="gender">남자</label>
+                <input type="radio" name="gender" id="female" value="여자" style="transform: scale(0.5); width: 50px;">
+                <label for="female" class="gender">여자</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="mexp">등산 경험</label>
+                <select id="mexp" name="mexp">
+                  <option value="0">초급</option>
+                  <option value="1">중급</option>
+                  <option value="2">고급</option>
+                </select>
+              </div>
+            </li>
+            <li>
+              <div>
+                <label for="loc">지역</label>
+                <select id="loc" name="loc">
+                  <option value="서울특별시">서울특별시</option>
+                  <option value="부산광역시">부산광역시</option>
+                  <option value="대구광역시">대구광역시</option>
+                  <option value="인천광역시">인천광역시</option>
+                  <option value="광주광역시">광주광역시</option>
+                  <option value="대전광역시">대전광역시</option>
+                  <option value="울산광역시">울산광역시</option>
+                  <option value="세종특별자치시">세종특별자치시</option>
+                  <option value="경기도">경기도</option>
+                  <option value="충청북도">충청북도</option>
+                  <option value="충청남도">충청남도</option>
+                  <option value="강원특별자치도">강원특별자치도</option>
+                  <option value="경상북도">경상북도</option>
+                  <option value="경상남도">경상남도</option>
+                  <option value="전북특별자치도">전북특별자치도</option>
+                  <option value="전라남도">전라남도</option>
+                  <option value="제주특별자치도">제주특별자치도</option>
+                </select>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h4>H!KERS 가입 약관</h4>
+                <div class="contract">
+                  <p>환영합니다! 'H!KERS' 등산 커뮤니티 페이지에 가입하시기 전에 아래의 약관을 주의 깊게 읽어주시기 바랍니다. 이 약관은 당사와 당신 간의 법적인 권리와 의무를 규정하며, 'H!KERS' 등산 커뮤니티 페이지의 이용 조건을 명확히 합니다.</p>
+                  <p><span>1. 서비스의 정의</span></p>
+                  <p>1.1. 'H!KERS' 등산 커뮤니티 페이지: 본 약관에서는 "H!KERS 등산 커뮤니티 페이지"라 함은 등산과 관련된 정보 교류, 토론, 사진 공유 등의 목적을 가진 온라인 플랫폼을 말합니다.</p>
+                  <p><span>2. 이용약관의 효력과 변경</span></p>
+                  <p>2.1. 본 약관은 'H!KERS' 등산 커뮤니티 페이지에 가입하여 서비스를 이용하고자 하는 모든 회원에게 적용됩니다.</p>
+                  <p>2.2. 'H!KERS' 등산 커뮤니티 페이지는 필요 시 이용 약관을 수정할 권리가 있으며, 이 경우 변경 사항을 사전에 공지합니다. 변경 사항은 공지 후 일정 기간 이내에 적용되며, 이 기간 동안 회원은 변경 사항을 검토할 수 있는 권리가 있습니다.</p>
+                  <p><span>3. 회원의 의무</span></p>
+                  <p>3.1. 'H!KERS' 등산 커뮤니티 페이지의 서비스를 이용할 때, 모든 회원은 본 약관 및 관련 법률을 준수해야 합니다.</p>
+                  <p>3.2. 회원은 본인의 계정 정보를 안전하게 관리하고, 제3자가 접근하지 못하도록 보호해야 합니다.</p>
+                  <p>3.3. 회원은 'H!KERS' 등산 커뮤니티 페이지를 이용함에 있어서 다른 회원의 권리를 침해하지 않아야 하며, 타인에게 피해를 주는 행위를 금지합니다.</p>
+                  <p>3.4. 회원은 허위 정보를 제공하거나 다른 사람의 개인정보를 도용해서는 안 됩니다.</p>
+                  <p>3.5. 회원은 상업적 광고, 홍보, 스팸, 외설적이거나 폭력적인 내용의 게시물을 금지합니다.</p>
+                  <p><span>4. 서비스 제공 및 중단</span></p>
+                  <p>4.1. 'H!KERS' 등산 커뮤니티 페이지는 회원에게 다양한 서비스를 제공합니다. 이 서비스는 무료로 제공될 수 있으며, 일부 유료 서비스가 포함될 수 있습니다.</p>
+                  <p>4.2. 'H!KERS' 등산 커뮤니티 페이지는 필요에 따라 사전 공지 없이 서비스의 일부 또는 전부를 변경하거나 중단할 수 있습니다.</p>
+                  <p>4.3. 서비스 중단 시 'H!KERS' 등산 커뮤니티 페이지는 합리적인 노력을 다해 회원에게 사전 공지합니다. 단, 불가피한 사유로 사전 공지가 어려운 경우에는 사후에 공지할 수 있습니다.</p>
+                  <p><span>5. 개인정보 보호</span></p>
+                  <p>5.1. 'H!KERS' 등산 커뮤니티 페이지는 회원의 개인정보를 보호하기 위해 최선을 다합니다. 회원의 개인정보는 본인의 동의 없이 제3자에게 제공되지 않습니다.</p>
+                  <p>5.2. 'H!KERS' 등산 커뮤니티 페이지는 회원의 개인정보를 안전하게 관리하며, 관련 법률에 따라 보호조치를 취합니다.</p>
+                  <p><span>6. 회원 탈퇴 및 자격 상실</span></p>
+                  <p>6.1. 회원은 언제든지 'H!KERS' 등산 커뮤니티 페이지를 탈퇴할 수 있습니다. 탈퇴를 원할 경우, 사이트 내의 탈퇴 절차를 따르면 됩니다.</p>
+                  <p>6.2. 'H!KERS' 등산 커뮤니티 페이지는 회원이 본 약관을 위반하는 경우 사전 통지 없이 회원 자격을 제한하거나 박탈할 수 있습니다.</p>
+                  <p>6.3. 회원 자격이 박탈된 경우, 재가입은 제한될 수 있습니다.</p>
+                  <p><span>7. 책임 제한</span></p>
+                  <p>7.1. 'H!KERS' 등산 커뮤니티 페이지는 회원 간 또는 회원과 제3자 간의 분쟁에 대해 책임을 지지 않습니다. 다만, 필요에 따라 중재 역할을 할 수 있습니다.</p>
+                  <p>7.2. 'H!KERS' 등산 커뮤니티 페이지는 무료로 제공되는 서비스와 관련하여 발생하는 문제에 대해 책임을 지지 않습니다.</p>
+                  <p><span>8. 준거법 및 재판관할</span></p>
+                  <p>8.1. 본 약관은 대한민국 법률에 따라 규율되고 해석됩니다.</p>
+                  <p>8.2. 'H!KERS' 등산 커뮤니티 페이지와 회원 간 발생한 분쟁에 관한 소송은 대한민국의 법원을 관할 법원으로 합니다.</p>
+                </div>
+                <div class="agree-container">
+                  <input type="checkbox" id="agree" name="agree">
+                  <label for="agree">약관에 동의합니다</label><br/>
+                  <button type="submit">회원가입</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script th:src="@{/js/member/joinForm.js}"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+body > div > main > h3 {
+  line-height: 200px;
+  font-size: 3.5vh;
+  font-weight: 700;
+  /* border-bottom: 2px solid var(--color-lightgray); */
+  margin-bottom: 100px;
+}
+
+form {
+  width: 100%;
+}
+
+input {
+  width: 500px;
+  height: 50px;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+input::placeholder {
+  text-align: left;
+  padding-left: 20px;
+  font-size: 0.8rem;
+}
+
+button {
+  border: none;
+  width: 300px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+body > div > main > form > ul.find_idpw {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+body > div > main > form > ul.find_idpw > li {
+  width: 200px;
+  text-align: center;
+  margin-bottom: 200px;
+}
+
+body > div > main > form > ul.find_idpw > li > a {
+  font-size: 16px;
+  color: var(--color-darkgray);
+}
+
+body > div > main > form > ul.find_idpw> li:first-child {
+  border-right: 1px solid var(--color-darkgray);
+}
+
+p:nth-child(4) {
+  color: var(--color-darkgray);
+}

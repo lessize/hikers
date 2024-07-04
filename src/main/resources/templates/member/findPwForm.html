@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::link},        <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <title>비밀번호 찾기</title>
+  <link rel="stylesheet" th:href="@{/css/member/findPwForm.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <h3>비밀번호 찾기</h3>
+        <form method="post">
+          <ul>
+            <li><input type="text" name="id" id="id" placeholder="아이디 입력" required></li>
+            <li><input type="text" name="nickname" id="nickname" placeholder="닉네임 입력" required></li>
+          </ul>
+          <button type="button" id="chkBtn">비밀번호 찾기</button>
+          <div id="msg"></div>
+        </form>
+      </main>
+    </div>
+  </div>
+  <script th:src="@{/js/member/findPwForm.js}"></script>
+</body>
+</html>

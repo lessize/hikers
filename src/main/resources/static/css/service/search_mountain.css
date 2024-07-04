@@ -1,0 +1,90 @@
+main {
+  height: 753px;
+}
+
+body > div > main > div.search-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+#searchForm{
+  margin: 0 10px;
+}
+
+#searchForm > #stb, #searchForm > button {
+  padding: 5px;
+  outline: 0;
+  border-radius: 0;
+}
+
+#searchForm > button {
+  border: none;
+  width: 100px;
+  height: 36px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+#showRegion {
+  margin: 0 10px;
+  padding: 5px;
+  border: none;
+  width: 300px;
+  height: 36px;
+  background-color: var(--color-green);
+  color: var(--color-white);
+  outline: 0;
+  border-radius: 0;
+}
+
+#hiddenSearch {
+  max-height: 70vh;
+  overflow-y: auto;
+  max-height: 550px;
+}
+
+#hiddenSearch, #hiddenSelect {
+    display: none;
+    padding: 0 20px 20px 20px;
+    border-radius: 5px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 구성된 그리드 */
+    gap: 10px;
+}
+
+.city-button, #myLocation {
+    padding: 10px;
+    /* background-color: #f0f0f0;
+    border: 1px solid #ccc; */
+    cursor: pointer;
+    text-align: center;
+    /* border-radius: 5px; */
+    border: none;
+    background-color: var(--color-green);
+    color: var(--color-white);
+    outline: 0;
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+}
+.autocomplete-item:hover {
+    background-color: var(--color-green);
+    color: var(--color-beige);
+}
+
+.city-button:hover, #myLocation:hover {
+    background-color: var(--color-beige);
+    color: var(--color-green);
+}
+
+#myLocation {
+    grid-column: span 4; /* 4개의 열을 차지하도록 설정 */
+}

@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}"th:with="s_id=${session?.loginMember?.id},
+               s_nickname=${session?.loginMember?.nickname},
+               s_loc=${session?.loginMember?.loc},
+               s_gubun=${session?.loginMember?.gubun}"
+
+      th:data-s-id="${s_id}"
+      th:data-s-nickname="${s_nickname}"
+      th:data-s-loc="${s_loc}"
+      th:data-s-gubun="${s_gubun}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의 작성</title>
+</head>
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::global"/>
+  <div id="content" >
+
+    <main>
+      <link rel="stylesheet" href="/css/community/addcontact.css">
+      <script type="text/javascript" src="/js/community/addcontact.js" defer></script>
+      <title>문의 등록</title>
+      <div class="main_body">
+        <div class="header">
+          <div class="background_header">
+            <div class="header_font"></div>
+          </div>
+          <div class="background_menu">
+            <div class="manual">
+              <div class="manual_data">
+                <div class="manual_text">
+                  <div class="menual_1">
+                    <div class="menual_font_1">문의 작성</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manual_underbar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="main" id="main">
+          <form class="label" action="/community/addcontact" method="post">
+            <div class="community">
+              <div class="in_community_label in_community">
+                <label class="menual_font_1">문의하기</label>
+              </div>
+            </div>
+            <div class="text_title in_community">
+              <input class="title_font" type="text" name="title" id="title"  placeholder="제목을 입력하세요">
+            </div>
+            <div class="text_detail in_community">
+              <textarea class="detail_font" name="bcontent" id="bcontent" placeholder="본문을 입력하세요..."></textarea>
+            </div>
+            <div class="hidden in_community">
+              <div><input type="checkbox" name="tags" value="숨김" id="hidden"><label for="hidden">비밀글로 등록하겠습니다.</label></div>
+              <input type="hidden" id="checkboxData" name="checkboxData">
+            </div>
+            <div class="set_button">
+              <div class="registration in_community"><button type="submit" class="button">등록</button></div>
+              <div class="cancel in_community"><button type="button" class="button" onclick="location.href='/community'">취소</button></div>
+            </div>
+          </form>
+        </div>
+        <div class="footer"></div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

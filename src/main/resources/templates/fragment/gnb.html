@@ -1,0 +1,94 @@
+<th:block th:fragment="global">
+  <div id="gnb">
+    <aside id="nav_btn">
+      <div class="btn_box">
+        <div class="webapp_cover">
+          <div class="menu_button">
+            <input type="checkbox" id="menu_checkbox">
+            <label for="menu_checkbox" id="menu_label">
+              <div id="menu_text_bar"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <nav>
+      <div class="nav_box">
+        <div class="deco"><i class="fa-solid fa-ellipsis"></i></div>
+        <div class="nav_list">
+          <div class="btn_box"></div>
+          <ul class="menu_list">
+            <li>
+              <h3><a th:href="@{/members/profile}">내 프로필</a></h3>
+            </li>
+            <li>
+              <h3><a th:href="@{/service/search_mountain}">산길 정보</a></h3>
+            </li>
+            <li>
+              <h3><a href="#">산길 추천</a></h3>
+              <span></span>
+              <ul class="menu_sublist">
+                <li><a th:href="@{/recommend/100_mountains}">100대 명산</a></li>
+                <th:block th:if="${session.loginMember}">
+                  <li><a th:href="@{/recommend/personal_recommend}">오늘의 산 추천</a></li>
+                </th:block>
+                <th:block th:unless="${session.loginMember}">
+                  <li><a th:href="@{/members/login}">오늘의 산 추천</a></li>
+                </th:block>
+                <li><a th:href="@{/recommend/rated_mountains}">지금 인기 있는 산</a></li>
+              </ul>
+            </li>
+            <li>
+              <h3><a th:href="@{/community}">커뮤니티</a></h3>
+              <span></span>
+              <ul class="menu_sublist">
+                <li><a th:href="@{/community}">등산 일지</a></li>
+                <li><a th:href="@{/community/clubAll}">동호회 모집</a></li>
+                <li><a th:href="@{/community/contactAll}">문의하기</a></li>
+              </ul>
+            </li>
+          </ul>
+          <h3><img src="/img/logo/logo_white.png" alt="H!KERS"></h3>
+        </div>
+        <div class="deco"><i class="fa-solid fa-ellipsis"></i></div>
+      </div>
+    </nav>
+  </div>
+</th:block>
+<th:block th:fragment="admin">
+  <div id="gnb">
+    <aside id="nav_btn">
+      <div class="btn_box">
+        <div class="webapp_cover">
+          <div class="menu_button">
+            <input type="checkbox" id="menu_checkbox">
+            <label for="menu_checkbox" id="menu_label">
+              <div id="menu_text_bar"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <nav>
+      <div class="nav_box">
+        <div class="deco"><i class="fa-solid fa-ellipsis"></i></div>
+        <div class="nav_list">
+          <div class="btn_box"></div>
+          <ul class="menu_list">
+            <li>
+              <h3><a href="#">관리자</a></h3>
+              <span></span>
+              <ul class="menu_sublist">
+                <li><a href="/manager/viewBbsAll">게시판 관리</a></li>
+                <li><a href="/manager/viewInquiryAll">문의글 관리</a></li>
+                <li><a href="/manager/plot">리뷰 데이터</a></li>
+              </ul>
+            </li>
+          </ul>
+          <h3><img src="/img/logo/logo_white.png" alt="H!KERS"></h3>
+        </div>
+        <div class="deco"><i class="fa-solid fa-ellipsis"></i></div>
+      </div>
+    </nav>
+  </div>
+</th:block>

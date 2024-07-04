@@ -1,0 +1,117 @@
+body > div > main > h3 {
+  line-height: 200px;
+  font-size: 3.5vh;
+  font-weight: 700;
+  /* border-bottom: 2px solid var(--color-lightgray); */
+  margin-bottom: 100px;
+}
+
+form {
+  width: 100%;
+}
+
+.mem_info {
+  width: 100%;
+  margin: 0 auto;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li > div {
+  display: flex;
+  justify-content: flex-start;
+  width: 1200px;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+li > div > label {
+  width: 300px;
+  text-align: start;
+  font-weight: 700;
+  padding-left: 20px;
+  line-height: 40px;
+}
+
+li > div > input {
+  width: 600px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+li > div > input::placeholder {
+  font-size: 0.8rem;
+  text-align: left;
+  padding-left: 20px;
+}
+
+#signupForm > ul > li > div > span {
+  color: tomato;
+  font-size: 0.8rem;
+  position: absolute;
+  top: 110%;
+  left: 300px;
+}
+
+li > div > button {
+  width: 150px;
+  border: none;
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+li > div > label,
+li > div > input,
+li > div > button {
+  display: inline-block;
+  outline: none;
+}
+
+li:last-child > div {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.gender {
+    font-weight: 300; /* 글꼴 굵기 설정 */
+}
+
+.gender input[type="radio"] {
+    transform: scale(0.8); /* 체크박스 크기 조정 */
+    margin-right: 5px; /* 체크박스 간격 조정 */
+}
+
+li > div > h4 {
+  font-size: 2.7vh;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+li > div > .contract {
+  border: 1px solid var(--color-black);
+  width: 800px;
+  height: 400px;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+li > div > .contract > p {
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+li:last-child > div > .agree-container > button {
+  margin: 100px 0;
+  width: 300px;
+  height: 50px;
+  border: 0;
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+

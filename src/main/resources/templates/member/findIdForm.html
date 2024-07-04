@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::link},        <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" th:href="@{/img/logo/fcon_96.png}">
+  <title>아이디 찾기</title>
+  <link rel="stylesheet" th:href="@{/css/member/findIdForm.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <h3>아이디 찾기</h3>
+        <form id="findIdForm">
+          <p><input type="text" name="nickname" placeholder="닉네임 입력" required></p>
+          <p><input type="text" name="tel" placeholder="전화번호 입력('-' 포함)" required></p>
+          <p>
+            <button type="submit">아이디 찾기</button>
+          </p>
+          <p class="existedId">
+            <span>아이디 : </span><span class="your_id"></span>
+          </p>
+        </form>
+      </main>
+    </div>
+  </div>
+  <script th:src="@{/js/member/findIdForm.js}"></script>
+</body>
+</html>

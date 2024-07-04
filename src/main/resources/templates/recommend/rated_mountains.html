@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{::link},              <!--/* styles */-->
+      ~{::script},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/recommend/mountainsRate.css">
+  <script src="/js/recommend/mountainsRate.js" defer></script>
+  <title>지금 인기있는 산</title>
+</head>
+<body>
+  <div class="wrap">
+    <div id="gnb" th:replace="fragment/gnb::global"/>
+    <div id="content" >
+      <main>
+        <!--  이부분에 내용 채우기-->
+        <div class="container">
+          <h3>산 정보</h3>
+          <div class="button-container">
+            <button onclick="toggleOrder()" class="toggle-button">별점 낮은 순</button>
+          </div>
+          <ul class="mntn_list">
+            <li class="mntn_item" th:each="mountainMap : ${topRateMountain}" th:data-mountain-id="${mountainMap['mountain'].mntnCode}">
+              <img th:src="@{/recommend/image/{mntnCode}(mntnCode=${mountainMap['mountain'].mntnCode})}" alt="Mountain Image" class="mntn_img"/>
+              <div class="mntn_details">
+                <div class="mntn_header">
+                  <p class="mntn_name" th:text="${mountainMap['mountain'].mntnNm}"></p>
+                  <div class="star-rating" th:data-rating="${mountainMap['mountain'].avgStaring}">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                  </div>
+                </div>
+                <div th:if="${pythonResult != null}">
+                  <div th:each="result : ${pythonResult}" th:if="${result['mntnCode']} == ${mountainMap['mountain'].mntnCode} and ${result['total_reviews'] != null}">
+                    <!-- 긍정 결과 표시 -->
+                    <div class="result_graph">
+                      <p>긍정</p>
+                      <div class="graph-bar" style="margin-left: 10px;">
+                        <div class="positive-rate" th:style="'width:'+${result['average_positive_rate']}+'%'"></div>
+                      </div>
+                    </div>
+                    <!-- 부정 결과 표시 -->
+                    <div class="result_graph">
+                      <p>부정</p>
+                      <div class="graph-bar" style="margin-left: 10px;">
+                        <div class="negative-rate" th:style="'width:'+${result['average_negative_rate']}+'%'"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p th:unless="${pythonResult != null}">감정 분석 결과가 없습니다.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

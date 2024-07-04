@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+@import url(./reset.css); /* css reset */
+@import url(./layout.css); /* 공통 layout */
+@import url(./font.css); /* 기본 폰트 */
+@import url(./color.css); /* 색상 */
+@import url(./header.css); /* header */
+@import url(./footer.css); /* footer */
+@import url(./gnb.css); /* gnb */
+@import url(./searchbar.css); /* searchbar */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  /* background-color: var(--color-beige); */
+  /* outline: 1px solid tomato; */
+}
+
+

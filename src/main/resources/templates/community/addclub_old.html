@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/community/addclub.css">
+  <script type="text/javascript" src="/js/community/addclub.js" defer></script>
+  <title>동호회 등록</title>
+</head>
+<body class="main_body">
+<header class="header">
+  <div class="background_header">
+    <div class="header_font">header</div>
+  </div>
+  <div class="background_menu">
+    <div class="manual">
+      <div class="manual_data">
+        <div class="manual_text">
+          <div class="menual_1">
+            <div class="menual_font_1">동호회 작성</div>
+          </div>
+        </div>
+      </div>
+      <div class="manual_underbar"></div>
+    </div>
+  </div>
+</header>
+<main class="main" id="main">
+  <form class="label" action="/community/addclub" method="post">
+    <input type="hidden" id="memberId" name="memberId" value="${s_id}">
+    <div class="community">
+      <div class="in_community_label in_community">
+        <label class="menual_font_1">동호회 모집</label>
+      </div>
+    </div>
+    <div class="date">
+      <div class="in_date_label in_community"><label for="date">일정 시간</label></div>
+      <div class="in_date_code1 in_community">
+        <input type="date" id="date" name="date">
+      </div>
+      <div class="mntn_code_label in_community"><label for="mntnNm">산명</label></div>
+      <div class="mntn_code_code in_community">
+        <input class="in_community" type="text" name="mntnNm" id="mntnNm">
+        <button id="searchButton">검색</button>
+      </div>
+    </div>
+    <div class="personnel">
+      <div class="in_personnel_label in_community"><label for="personnel">모집 인원</label></div>
+      <div class="in_personnel_code1">
+      <input class="runing_time_font " type="text" name="personnel" id="personnel">
+      </div>
+      <div class="in_personnel_code2"><label>명</label></div>
+      <div class="mntn_select_label in_community"><label for="mntnLoc">주소명</label></div>
+      <div class="mntn_select_code in_community">
+        <select name="mntnLoc" id="mntnLoc" class="select_size">
+          <option value="">==지역선택==</option>
+          <option value="1">결과 없음</option>
+        </select>
+      </div>
+    </div>
+    <div class="text_title in_community">
+      <input class="title_font" type="text" name="title" id="title" value="제목을 입력하세요">
+    </div>
+    <div class="text_detail in_community">
+      <textarea class="detail_font" name="bcontent" id="bcontent">본문을 입력하세요</textarea>
+    </div>
+    <div class="attachment">
+      <input class="fileList" type="file" name="files" accept="image/png, image/jpeg" multiple id="code">
+    </div>
+    <div class="set_button">
+      <div class="registration in_community"><button type="submit" class="button">등록</button></div>
+      <div class="cancel in_community"><button type="button" class="button" onclick="location.href='/community'">취소</button></div>
+    </div>
+  </form>
+</main>
+<footer class="footer"></footer>
+</body>
+</html>

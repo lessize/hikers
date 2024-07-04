@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{::link},              <!--/* styles */-->
+      ~{::script},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{},              <!--/* style */-->
+      ~{},              <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>산 검색</title>
+  <link rel="stylesheet" th:href="@{/css/service/search_mountain.css}">
+  <script defer th:src="@{/js/service/search_mountain.js}"></script>
+</head>
+<body>
+<div class="wrap">
+  <div id="gnb" th:replace="fragment/gnb::global"/>
+  <div id="content" >
+    <main>
+      <div class="search-wrap">
+        <form id="searchForm" method="get" action="/service/search">
+          <input type="text" name="searchText" id="stb" autocomplete="off" placeholder="산 이름을 입력하세요!"><button type="submit">검색</button>
+        </form>
+        <button id="showRegion">지역을 선택하세요!</button>
+      </div>
+      <div class="option-wrap">
+        <div id="hiddenSearch"></div>
+        <div id="hiddenSelect">
+          <div>
+            <form id="regionForm" class="grid-container" method="get" action="/service/search">
+              <button type="submit" name="city" value="서울특별시" class="city-button">서울특별시</button>
+              <button type="submit" name="city" value="인천광역시" class="city-button">인천광역시</button>
+              <button type="submit" name="city" value="부산광역시" class="city-button">부산광역시</button>
+              <button type="submit" name="city" value="대구광역시" class="city-button">대구광역시</button>
+              <button type="submit" name="city" value="광주광역시" class="city-button">광주광역시</button>
+              <button type="submit" name="city" value="대전광역시" class="city-button">대전광역시</button>
+              <button type="submit" name="city" value="울산광역시" class="city-button">울산광역시</button>
+              <button type="submit" name="city" value="경기도" class="city-button">경기도</button>
+              <button type="submit" name="city" value="강원도" class="city-button">강원도</button>
+              <button type="submit" name="city" value="충청남도" class="city-button">충청남도</button>
+              <button type="submit" name="city" value="충청북도" class="city-button">충청북도</button>
+              <button type="submit" name="city" value="전라남도" class="city-button">전라남도</button>
+              <button type="submit" name="city" value="전라북도" class="city-button">전라북도</button>
+              <button type="submit" name="city" value="경상남도" class="city-button">경상남도</button>
+              <button type="submit" name="city" value="경상북도" class="city-button">경상북도</button>
+              <button type="submit" name="city" value="제주도" class="city-button">제주도</button>
+              <button th:if="${session?.loginMember?.loc != null}" id="myLocation" type="submit" name="city" th:value="${session?.loginMember?.loc}" class="city-button">내 위치</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

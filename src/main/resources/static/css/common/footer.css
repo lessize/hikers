@@ -1,0 +1,26 @@
+/* 푸터 */
+footer {
+  height: 200px;
+  background-color: var(--color-green);
+  color: var(--color-darkgray);
+  padding-top: 50px;
+}
+
+footer h2 {
+  background-color: var(--color-green);
+  margin-bottom: 30px;
+}
+
+footer img {
+  background-color: var(--color-green);
+  height: 30px;
+}
+
+footer address {
+  background-color: var(--color-green);
+  font-style: normal;
+}
+
+footer div {
+  background-color: var(--color-green);
+}

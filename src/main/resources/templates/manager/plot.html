@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout::main(
+      ~{::title},       <!--/* title */-->
+      <!--/*--------------------------*/-->
+      <!--/* external */-->
+      ~{},              <!--/* styles */-->
+      ~{},              <!--/* scripts */-->
+      <!--/* internal */-->
+      ~{::style},              <!--/* style */-->
+      ~{::script},      <!--/* script */-->
+      <!--/*--------------------------*/-->
+      ~{::#gnb},        <!--/* gnb */-->
+      ~{::main}        <!--/* main */-->
+      )}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 리뷰 데이터</title>
+  <style>
+    .con {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .plot img{
+    width : 800px;
+    }
+    .plot {
+      max-width: 800px;
+      width: 100%;
+      height: auto;
+      margin: 10px;
+      display: block;
+    }
+
+    .plot img {
+      max-width: 100%;
+      height: auto;
+    }
+    .plot3{
+     margin: 20px;
+    }
+    .plot4{
+     margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="gnb" th:replace="fragment/gnb::admin"/>
+  <div id="content">
+  <main>
+    <div class="con">
+      <h4>관리자 리뷰 데이터</h4>
+      <div class="container">
+        <div class="plot plot1">
+          <img th:src="'data:image/png;base64,' + ${imageData1}" alt="Plot Image 1"/>
+        </div>
+        <div class="plot plot2">
+          <img th:src="'data:image/png;base64,' + ${imageData2}" alt="Plot Image 2"/>
+        </div>
+        <div class="plot plot3">
+          <img th:src="'data:image/png;base64,' + ${imageData3}" alt="Plot Image 3"/>
+        </div>
+        <div class="plot plot4">
+          <img th:src="'data:image/png;base64,' + ${imageData4}" alt="Plot Image 4"/>
+        </div>
+        <div class="plot plot5">
+          <img th:src="'data:image/png;base64,' + ${imageData5}" alt="Plot Image 5"/>
+        </div>
+      </div>
+  </main>
+</div>
+</div>
+<script>
+</script>
+</body>
+</html>

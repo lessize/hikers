@@ -1,0 +1,65 @@
+/* 전체 컨테이너 설정 */
+.main_container {
+  display: flex;
+  flex-direction: row; /* 요소들을 가로로 배치 */
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 산 목록 설정 */
+.mountain_list {
+  flex: 1; /* 산 목록과 지도가 동일한 비율로 공간 차지 */
+  padding-right: 10px; /* 산 목록과 지도 사이의 간격 조정 */
+}
+
+.cont1 {
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.cont1 h4 {
+  margin-top: 0;
+}
+
+.cont_list {
+  list-style: none;
+  padding: 0;
+}
+
+.cont_list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #eaeaea;
+  border-radius: 5px;
+}
+
+.mntn_name {
+  font-weight: bold;
+}
+
+.mntn_info {
+  margin-top: 5px;
+}
+
+/* 지도 설정 */
+.map {
+  flex: 1; /* 산 목록과 지도가 동일한 비율로 공간 차지 */
+  padding-left: 10px; /* 산 목록과 지도 사이의 간격 조정 */
+  height: 100vh;
+}
+
+.map #title {
+  margin-bottom: 10px;
+}
+
+#map {
+  width: 100%;
+  height: calc(100% - 50px);
+}
+h3 {
+  font-size: 32px; /* 기본값보다 큰 글자 크기 */
+}
